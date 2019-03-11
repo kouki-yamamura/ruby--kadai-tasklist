@@ -1,18 +1,32 @@
+
 <h1>メッセージ一覧</h1>
 
-<ul>
-<% @task.each do |task|%>
+<%if @task.any?%>
 
-<li>
-    <%= link_to task.id ,task%>
-    :
-    <%= task.status %>
-    &gt;
-    <%= task.content %>
-    
-</li>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>ステータス</th>
+            <th>タスク</th>
+        </tr>
+    </thead>
+    <tbody>
+       <% @task.each do |task|%> 
+        <tr>
+            <td><%= link_to task.id ,task%></td>
+            <td><%= task.status %></td>
+            <td><%= task.content %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<div>
+  <%= paginate @task %>   
+</div>
 
 <% end %>
-</ul>
 
-<%=link_to '新規メッセージの投稿' , new_task_path%>
+
+<%=link_to '新規メッセージの投稿' , new_task_path ,class: "btn btn-primary"%>
+    
